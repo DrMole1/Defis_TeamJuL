@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://script/Main.gd" type="Script" id=1]
+[ext_resource path="res://scene/Synbole.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/HUD.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 803.103, 132.603, 0, 0, 0, 0, 826.404, 402.495, 0, 0, 0, 0, 145.416, 403.165, 0, 0, 0, 0, 134.818, 131.247, 0, 0, 0, 0, 226.569, 387.141, 0, 0, 0, 0, 256.918, 133.959, 0, 0, 0, 0, 368.92, 385.051, 0, 0, 0, 0, 385.542, 133.959, 0, 0, 0, 0, 468.495, 393.68, 0, 0, 0, 0, 518.826, 135.316, 0, 0, 0, 0, 591.526, 395.036, 0, 0, 0, 0, 629.74, 135.994, 0, 0, 0, 0, 681.999, 385.45, 0, 0, 0, 0, 720.15, 135.316, 0, 0, 0, 0, 761.161, 381.254, 0, 0, 0, 0, 803.103, 132.603 )
+}
+
+[node name="Main" type="Node" index="0"]
+
+script = ExtResource( 1 )
+Synbole = ExtResource( 2 )
+
+[node name="SynboleTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="Path2D" type="Path2D" parent="." index="1"]
+
+position = Vector2( -152.238, -218.625 )
+scale = Vector2( 1.37613, 1.95258 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
+
+position = Vector2( 803.103, 132.603 )
+rotation = 1.48467
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
+[node name="HUD" parent="." index="2" instance=ExtResource( 3 )]
+
+[connection signal="timeout" from="SynboleTimer" to="." method="_on_SynboleTimer_timeout"]
+
+
